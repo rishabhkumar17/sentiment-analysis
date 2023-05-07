@@ -11,6 +11,7 @@ let maxLen;
 let wordIndex;
 let prediction;
 
+// Load a pre-trained model
 const loadModel = async () => {
   model = await tf.loadLayersModel(urlModel);
   const sentimentMetadata = await loadMetadata();
@@ -18,18 +19,22 @@ const loadModel = async () => {
   maxLen = sentimentMetadata["max_len"];
   wordIndex = sentimentMetadata["word_index"];
 };
+
+// Get metaData for the model so that we use it to predict later
 const loadMetadata = async () => {
   const metadataJson = await fetch(urlMetaData);
   const metadata = await metadataJson.json();
   return metadata;
 };
+
 const predict = async (msg) => {
   await tf.tidy(() => {
+    // Convert to lowercase and remove punctuations
     const inputText = msg
       .trim()
       .toLowerCase()
       .replace(/(\.|\,|\!)/g, "")
-      .split(" ");
+      .split(" "); // Split the text into words
     const inputBuffer = tf.buffer([1, maxLen], "float32");
     for (let i = 0; i < inputText.length; ++i) {
       const word = inputText[i];
