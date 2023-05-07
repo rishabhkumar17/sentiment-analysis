@@ -1,4 +1,10 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  TextField,
+  Typography,
+} from "@mui/material";
 import "./App.css";
 import { useEffect, useState } from "react";
 
@@ -6,8 +12,10 @@ function App() {
   const [text, setText] = useState("");
   const [sentiment, setSentiment] = useState("");
   const [confidence, setConfidence] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const performAPICall = async () => {
+    setLoading(true);
     let response = {};
     try {
       response = await (
@@ -29,6 +37,7 @@ function App() {
   };
 
   const setPredictions = (response) => {
+    setLoading(false);
     if (response <= 0.6) setSentiment("Negative");
     if (response > 0.6 && response < 0.65) setSentiment("Neutral");
     if (response >= 0.65) setSentiment("Positive");
@@ -110,6 +119,7 @@ function App() {
             Calculate
           </Button>
         </Box>
+        {loading && <CircularProgress color="secondary" />}
         {confidence && (
           <Box>
             <Typography sx={{ fontSize: 25, fontWeight: "700" }}>
