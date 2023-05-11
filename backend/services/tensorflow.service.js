@@ -43,11 +43,11 @@ const predict = async (msg) => {
     const input = inputBuffer.toTensor();
     const output = model.predict(input);
     prediction = Array.from(output.dataSync())[0];
+    console.log(output.dataSync()[0]);
   });
 };
 
 const getPrediction = async (msg) => {
-  console.log(msg);
   await loadModel();
 
   await predict(msg);
