@@ -2,6 +2,7 @@ const tf = require("@tensorflow/tfjs");
 
 const urlModel =
   "https://storage.googleapis.com/tfjs-models/tfjs/sentiment_cnn_v1/model.json";
+
 const urlMetaData =
   "https://storage.googleapis.com/tfjs-models/tfjs/sentiment_cnn_v1/metadata.json";
 
