@@ -36,6 +36,7 @@ const predict = async (msg) => {
       .toLowerCase()
       .replace(/(\.|\,|\!)/g, "")
       .split(" "); // Split the text into words
+
     const inputBuffer = tf.buffer([1, maxLen], "float32");
     for (let i = 0; i < inputText.length; ++i) {
       const word = inputText[i];
