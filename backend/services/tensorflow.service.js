@@ -44,8 +44,11 @@ const predict = async (msg) => {
       inputBuffer.set(wordIndex[word] + indexFrom, 0, i);
     }
     const input = inputBuffer.toTensor();
+
     const output = model.predict(input);
+
     prediction = Array.from(output.dataSync())[0];
+
     console.log(output.dataSync()[0]);
   });
 };
