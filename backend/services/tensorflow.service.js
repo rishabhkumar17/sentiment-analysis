@@ -24,7 +24,9 @@ const loadModel = async () => {
 // Get metaData for the model so that we use it to predict later
 const loadMetadata = async () => {
   const metadataJson = await fetch(urlMetaData);
+
   const metadata = await metadataJson.json();
+
   return metadata;
 };
 
